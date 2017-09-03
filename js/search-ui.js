@@ -67,48 +67,81 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 	}
 
 	scope.doSearch = function() {
-		var filterText = scope.query.toLowerCase();
+		var query = scope.query.toLowerCase().split(",");
+
 		scope.results = [];
 		scope.noResults = true;
-		var i, ii, j, jj;
-		//	Don't match less than three characters, the mockup seems to indicate this
-		if(filterText.length < 3)
-		{
-			scope.noResults = false;
-			return;
-		}
 
-		//	Using for loop for best performance, it's 4x faster than _.each()
-		for(i = 0, ii = scope.sites.length; i < ii; i++)
+		var alreadyMatched = [];	// This array holds the ids of sites that have already been pushed onto results, so that we don't push the same item twice
+
+		//	Using for loops for best performance, it's 4x faster than _.each()
+		for(k = 0, kk = query.length; k < kk; k++)
 		{
-			//	First, match against the site description
-			if(scope.sites[i].description.toLowerCase().indexOf(filterText) !== -1)
+			var filterText = trim(query[k]);
+			var i, ii, j, jj;
+			//	Don't match less than three characters, the mockup seems to indicate this
+			if(filterText.length < 3)
 			{
 				scope.noResults = false;
-				scope.results.push({
-					siteName: scope.sites[i].siteName,
-					siteDescription: scope.sites[i].description,
-					siteUrl: scope.sites[i].siteUrl
-				});
+				return;
 			}
-			else
+
+			for(i = 0, ii = scope.sites.length; i < ii; i++)
 			{
-				//	Nested loop, but since the arrays are small, and this loop is not always triggered, it's not too bad
-				for(j = 0, jj = scope.sites[i].categoryDescriptions.length; j < jj; j++)
+				//	First, match against the site description
+				if(scope.sites[i].description.toLowerCase().indexOf(filterText) !== -1 && !isInArray(scope.sites[i].id, alreadyMatched))
 				{
-					if(scope.sites[i].categoryDescriptions[j].toLowerCase().indexOf(filterText) !== -1)
+					scope.noResults = false;
+					scope.results.push({
+						siteName: scope.sites[i].siteName,
+						siteDescription: scope.sites[i].description,
+						siteUrl: scope.sites[i].siteUrl
+					});
+					alreadyMatched.push(scope.sites[i].id);
+				}
+				else
+				{
+					//	Nested loop, but since the arrays are small, and this loop is not always triggered, it's not too bad
+					for(j = 0, jj = scope.sites[i].categoryDescriptions.length; j < jj; j++)
 					{
-						scope.noResults = false;
-						scope.results.push({
-							siteName: scope.sites[i].siteName,
-							siteDescription: scope.sites[i].description,
-							siteUrl: scope.sites[i].siteUrl
-						});
-						break;
+						if(scope.sites[i].categoryDescriptions[j].toLowerCase().indexOf(filterText) !== -1 && !isInArray(scope.sites[i].id, alreadyMatched))
+						{
+							scope.noResults = false;
+							scope.results.push({
+								siteName: scope.sites[i].siteName,
+								siteDescription: scope.sites[i].description,
+								siteUrl: scope.sites[i].siteUrl
+							});
+							alreadyMatched.push(scope.sites[i].id);
+							break;
+						}
 					}
 				}
 			}
 		}
 	};
+
+	//
+	//	Helper functions
+	//
+
+	function trim(s) {
+		return s.replace(/^\s+|\s+$/g, "");
+	}
+
+	function isInArray(item, arr)
+	{
+		var i = arr.length;
+		var found = false;
+		while(i--)
+		{
+			if(item === arr[i])
+			{
+				found++;
+				break;
+			}
+		}
+		return found;
+	}
 
 }]);
