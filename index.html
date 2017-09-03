@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html ng-app="searchFilter">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adslot Search UI</title>
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/search-ui.css" rel="stylesheet" media="screen">
+<style>
+.ng-cloak { display: none !important; }
+</style>
+</head>
+<body ng-cloak>
+
+	<div class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"></a>
+			</div><!-- end .navbar-header -->
+		</div><!-- end .container -->
+	</div><!-- end .navbar navbar-default -->
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div id="searchUi" ng-controller="SearchController" >
+					<div id="searchWrapper">
+						<input type="text" class="form-control bigSearchInput" ng-model="query" autofocus ng-change="doSearch()" />
+					</div><!-- end #searchWrapper -->
+					<div id="searchResults">
+						<div class="noResults alert alert-info" ng-show="noResults">
+							We currently don't have any results for your search, try another
+						</div><!-- end .noResults -->
+						<div class="searchResultsContainer" ng-repeat="result in results">
+							<div class="searchResult">
+								<a class="searchResultTitle" href="{{result.siteUrl}}" target="_blank" ng-bind="result.siteName"></a>
+								<div class="searchResultDescription" ng-bind="result.siteDescription"></div>
+							</div><!-- end .searchResult -->
+						</div>
+					</div><!-- end #searchResults -->
+				</div><!-- end #searchUi -->
+			</div><!-- end .col-md-12 -->
+		</div><!-- end .row -->
+	</div><!-- end .container -->
+
+	<div class="navbar navbar-fixed-bottom" id="footer">
+		<div class="container">
+			<a class="footer-logo" href="#"></a>
+		</div>
+		<div class="container">
+			<div class="footer-links text-center">
+				&copy; 2017 Adslot |
+				<a href="#">Adslot Publisher</a> |
+				<a href="#">Adslot Create</a> |
+				<a href="#">Terms</a> |
+				<a href="#">Privacy Policy</a> |
+				<a href="#">Payment Policy</a>
+			</div><!-- end .footer-links -->
+		</div>
+	</div>
+
+	<script type="text/javascript" src="lib/angular.js"></script>
+	<script type="text/javascript" src="js/search-ui.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+body {
+	background: #F2F2F2;
+	color: #333;
+}
+
+.navbar-brand {
+	width: 150px;
+	height: 50px;
+	background: url(../images/logo.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.bigSearchInput {
+	font-size: 2.5rem;
+	height: auto;
+	padding: 2rem;
+	line-height: 2rem;
+	position: relative;
+}
+
+#searchWrapper::after {
+	content: "\e003";
+	font-family: 'Glyphicons Halflings';
+	right: 4rem;
+	top: 2.5rem;
+	color: #777;
+	font-size: 32px;
+	line-height: 2rem;
+	position: absolute;
+}
+
+#searchResults {
+	padding: 2rem 0;
+}
+
+.searchResult {
+	padding: 1rem;
+}
+
+.searchResultTitle {
+	font-size: 2rem;
+	text-decoration: underline;
+}
+
+.searchResultDescription {
+
+}
+
+#footer {
+	background: #2D2D2E;
+	color: #888;
+	padding: 1rem;
+}
+
+#footer a {
+	color: #888;
+	transition: color 1s ease-out;
+}
+
+#footer a:hover {
+	color: #FFF;
+	transition: color 0.3s ease-out;
+}
+
+.footer-links {
+	padding: 1rem;
+	border-top: 1px solid #555;
+}
+
+.footer-logo {
+	width: 150px;
+	height: 50px;
+	background: url(../images/logo-inverted.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center center;
+	display: block;
+	width: 150px;
+	margin: auto;
+}
+
+.alert-info {
+	background: transparent;
+	border: 1px solid #CCC;
+	color: #999;
+	font-size: 2rem;
+	padding-left: 5rem;
+	padding-right: 5rem;
+}
