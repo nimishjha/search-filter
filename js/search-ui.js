@@ -137,7 +137,7 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 		{
 			if(item === arr[i])
 			{
-				found++;
+				found = true;
 				break;
 			}
 		}
