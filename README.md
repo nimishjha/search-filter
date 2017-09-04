@@ -2,7 +2,7 @@
 
 To run, clone the repo, and open index.html in any modern browser.
 
-Todo: add tests
+To run tests, open test.html in any modern browser.
 
 
 
