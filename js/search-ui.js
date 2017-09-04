@@ -55,6 +55,17 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 		}
 	];
 
+	//	Create a lookup table for categories
+	scope.categoryLookup = {};
+	for(i = 0, ii = scope.categories.length; i < ii; i++)
+	{
+		scope.categoryLookup[scope.categories[i].id] = scope.categories[i].description;
+	}
+
+	function getCategoryDescriptionById(id) {
+		return scope.categoryLookup[id];
+	}
+
 	//	First, merge the category descriptions into the sites array
 	//	Uses more memory, but the dataset is small
 	for(var i = 0, ii = scope.sites.length; i < ii; i++)
@@ -62,7 +73,7 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 		scope.sites[i].categoryDescriptions = [];
 		for(var j = 0, jj = scope.sites[i].categoryIds.length; j < jj; j++)
 		{
-			scope.sites[i].categoryDescriptions.push(scope.categories[j].description);
+			scope.sites[i].categoryDescriptions.push(getCategoryDescriptionById(scope.sites[i].categoryIds[j]));
 		}
 	}
 
@@ -118,6 +129,7 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 					}
 				}
 			}
+			console.log(JSON.stringify(scope.results));
 		}
 	};
 
