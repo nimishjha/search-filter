@@ -129,7 +129,6 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 					}
 				}
 			}
-			console.log(JSON.stringify(scope.results));
 		}
 	};
 
