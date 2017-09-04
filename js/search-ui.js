@@ -94,7 +94,7 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 			if(filterText.length < 3)
 			{
 				scope.noResults = false;
-				return;
+				continue;
 			}
 
 			for(i = 0, ii = scope.sites.length; i < ii; i++)
