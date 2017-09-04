@@ -108,6 +108,23 @@ describe('search', function () {
 			}]);
 		});
 
+		it('If multiple terms are given and one of them is too short, we should still test against the other terms', function () {
+			var $scope = {};
+			var controller = $controller('SearchController', { $scope: $scope });
+			$scope.query = "xyz, auto";
+			$scope.doSearch();
+			expect($scope.results).toEqual([{
+				"siteName": "SurferMag",
+				"siteDescription": "This is the description for SurferMag",
+				"siteUrl": "www.surfermag.com"
+			},
+			{
+				"siteName": "Table Tennis Tips - How to not come runners up",
+				"siteDescription": "This is the description for Table Tennis Tips",
+				"siteUrl": "www.ttt.com"
+			}]);
+		});
+
 		it('No match should return an empty set of results', function () {
 			var $scope = {};
 			var controller = $controller('SearchController', { $scope: $scope });
