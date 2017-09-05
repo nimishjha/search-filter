@@ -79,7 +79,8 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 
 	scope.doSearch = function() {
 		var query = scope.query.toLowerCase().split(",");
-
+		var filterText;
+		var i, ii, j, jj, k, kk;
 		scope.results = [];
 		scope.noResults = true;
 
@@ -88,8 +89,7 @@ searchFilter.controller('SearchController', ['$scope', function(scope){
 		//	Using for loops for best performance, it's 4x faster than _.each()
 		for(k = 0, kk = query.length; k < kk; k++)
 		{
-			var filterText = trim(query[k]);
-			var i, ii, j, jj;
+			filterText = trim(query[k]);
 			//	Don't match less than three characters, the mockup seems to indicate this
 			if(filterText.length < 3)
 			{
